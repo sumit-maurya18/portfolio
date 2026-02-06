@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 export async function POST(req) {
   const { email, subject, message } = await req.json();
 
-  // Create Nodemailer transporter for Gmail
+  // Nodemailer transporter for Gmail
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -18,7 +18,7 @@ export async function POST(req) {
     //
     await transporter.sendMail({
       from: process.env.GMAIL_USER,
-      to: process.env.MY_GMAIL ,
+      to: process.env.MY_GMAIL,
       subject: `New message from ${email}: ${subject}`,
       html: `
         <h2>New Message</h2>
