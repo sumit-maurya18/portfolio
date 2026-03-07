@@ -90,21 +90,14 @@ const EmailSection = () => {
           <Link href="https://www.linkedin.com/in/sumitm620" target="_blank">
             <Image src={LinkedinIcon} alt='Linkedin Icon' />
           </Link>
-
-          {/* Uncomment if using Discord */}
-          {/* 
-          <Link href="https://discord.com" target="_blank">
-            <Image src={DiscordIcon} alt='Discord Icon' />
-          </Link>
-          */}
         </div>
       </div>
 
-      <div>
-        <form className='flex flex-col' onSubmit={handleSubmit}>
+      <div className="max-w-md">
+        <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
 
-          <div className='mb-6'>
-            <label htmlFor="email" className='text-white mb-2 block text-sm font-medium'>
+          <div>
+            <label htmlFor="email" className='text-white mb-1 block text-sm font-medium'>
               Your email
             </label>
 
@@ -113,13 +106,13 @@ const EmailSection = () => {
               type='email'
               id='email'
               required
-              className='bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5'
+              className='bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-md block w-full px-3 py-2'
               placeholder='youremail@gmail.com'
             />
           </div>
 
-          <div className='mb-6'>
-            <label htmlFor="subject" className='text-white mb-2 block text-sm font-medium'>
+          <div>
+            <label htmlFor="subject" className='text-white mb-1 block text-sm font-medium'>
               Subject
             </label>
 
@@ -128,21 +121,22 @@ const EmailSection = () => {
               type='text'
               id='subject'
               required
-              className='bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5'
+              className='bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-md block w-full px-3 py-2'
               placeholder='Just dropping a hi!'
             />
           </div>
 
-          <div className='mb-6'>
-            <label htmlFor='message' className='text-white block text-sm mb-2 font-medium'>
+          <div>
+            <label htmlFor='message' className='text-white block text-sm mb-1 font-medium'>
               Message
             </label>
 
             <textarea
               name='message'
               id='message'
+              rows="4"
               required
-              className='bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5'
+              className='bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-md block w-full px-3 py-2 resize-none'
               placeholder='Please leave your message.....'
             />
           </div>
@@ -151,31 +145,31 @@ const EmailSection = () => {
           <button
             type='submit'
             disabled={loading}
-            className='bg-purple-500 hover:bg-purple-600 text-white font-medium py-2.5 px-5 rounded-lg w-full flex items-center justify-center gap-2'
+            className='bg-purple-500 hover:bg-purple-600 text-white text-sm font-medium py-2 px-4 rounded-md w-full flex items-center justify-center gap-2'
           >
 
             {/* Circular progress indicator while message is being sent */}
             {loading ? (
               <>
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                 Sending...
               </>
             ) : (
-              "Send a Message"
+              "Send Message"
             )}
 
           </button>
 
           {/* Confirmation message */}
           {emailSubmitted && (
-            <p className='text-green-500 text-sm mt-2'>
+            <p className='text-green-500 text-sm'>
               Email sent successfully!
             </p>
           )}
 
           {/* Error message */}
           {errorMessage && (
-            <p className='text-red-500 text-sm mt-2'>
+            <p className='text-red-500 text-sm'>
               {errorMessage}
             </p>
           )}

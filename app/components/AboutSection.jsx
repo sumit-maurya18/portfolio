@@ -8,12 +8,15 @@ const TAB_DATA = [
     title: "Education",
     id: "education",
     content: (
-      <ul className="list-disc pl-2 text-[#ADB7BE]">
+      <ul className="list-disc pl-2 text-[#ADB7BE] break-words">
         <li>B.Tech CSE in Data Science</li>
         <li>Pranveer Singh Institute of Technology (PSIT), Kanpur, India</li>
         <li>Sept 2023 – June 2027</li>
         <li><strong>SGPA: </strong>8.33 / 10.0</li>
-        <li><strong>Relevant Coursework: </strong>DSA | DBMS | OS | Computer Networks | Machine Learning</li>
+        <li>
+          <strong>Relevant Coursework: </strong>
+          DSA | DBMS | OS | Computer Networks | Machine Learning
+        </li>
       </ul>
     ),
   },
@@ -21,7 +24,7 @@ const TAB_DATA = [
     title: "Languages",
     id: "languages",
     content: (
-      <ul className="list-disc pl-2 text-[#ADB7BE]">
+      <ul className="list-disc pl-2 text-[#ADB7BE] break-words">
         <li>C++</li>
         <li>Python</li>
         <li>JavaScript</li>
@@ -33,7 +36,7 @@ const TAB_DATA = [
     title: "Frameworks",
     id: "frameworks",
     content: (
-      <ul className="list-disc pl-2 text-[#ADB7BE]">
+      <ul className="list-disc pl-2 text-[#ADB7BE] break-words">
         <li>React.js</li>
         <li>Next.js</li>
         <li>Node.js</li>
@@ -45,7 +48,7 @@ const TAB_DATA = [
     title: "Data Science",
     id: "datascience",
     content: (
-      <ul className="list-disc pl-2 text-[#ADB7BE]">
+      <ul className="list-disc pl-2 text-[#ADB7BE] break-words">
         <li>Pandas</li>
         <li>NumPy</li>
         <li>Matplotlib</li>
@@ -61,7 +64,7 @@ const TAB_DATA = [
     title: "AI / ML",
     id: "aiml",
     content: (
-      <ul className="list-disc pl-2 text-[#ADB7BE]">
+      <ul className="list-disc pl-2 text-[#ADB7BE] break-words">
         <li>Scikit-Learn</li>
         <li>Supervised & Unsupervised Learning</li>
         <li>Regression & Classification Models</li>
@@ -74,7 +77,7 @@ const TAB_DATA = [
     title: "Databases",
     id: "databases",
     content: (
-      <ul className="list-disc pl-2 text-[#ADB7BE]">
+      <ul className="list-disc pl-2 text-[#ADB7BE] break-words">
         <li>SQLite</li>
         <li>MongoDB</li>
         <li>PostgreSQL</li>
@@ -114,23 +117,21 @@ const AboutMe = () => {
 
           <p className="text-base lg:text-lg text-[#ADB7BE]">
             I’m a third-year Computer Science student specializing in Data Science,
-            focused on building strong foundations in algorithms, systems, and
-            software engineering principles.
+            building strong foundations in algorithms, systems, and software engineering.
           </p>
 
           <p className="text-base lg:text-lg mt-2 text-[#ADB7BE]">
-            My interests lie at the intersection of Software Engineering and
-            AI/ML. I enjoy building scalable applications while exploring how
-            data and machine learning can be used to create intelligent systems.
+            My focus lies at the intersection of Software Engineering and AI/ML,
+            developing scalable applications while exploring data-driven solutions.
           </p>
 
           <p className="text-base lg:text-lg mt-2 text-[#ADB7BE]">
-            Through projects and continuous learning, I work on combining backend
-            development, data analysis, and machine learning to build systems that
-            are practical, scalable, and capable of generating meaningful insights.
+            Through projects and continuous learning, I work on backend systems,
+            data analysis, and machine learning to build practical, scalable solutions.
           </p>
 
-          <div className="flex flex-row justify-start mt-8 mb-0">
+          {/* Responsive tab buttons container */}
+          <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 mt-8 mb-0">
 
             <TabButton
               selectTab={() => handleTabChange("education")}
