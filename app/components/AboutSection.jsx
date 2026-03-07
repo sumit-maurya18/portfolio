@@ -5,6 +5,19 @@ import TabButton from "./TabButton";
 
 const TAB_DATA = [
   {
+    title: "Education",
+    id: "education",
+    content: (
+      <ul className="list-disc pl-2 text-[#ADB7BE]">
+        <li>B.Tech CSE in Data Science</li>
+        <li>Pranveer Singh Institute of Technology (PSIT), Kanpur, India</li>
+        <li>Sept 2023 – June 2027</li>
+        <li><strong>SGPA: </strong>8.33 / 10.0</li>
+        <li><strong>Relevant Coursework: </strong>DSA | DBMS | OS | Computer Networks | Machine Learning</li>
+      </ul>
+    ),
+  },
+  {
     title: "Languages",
     id: "languages",
     content: (
@@ -12,6 +25,7 @@ const TAB_DATA = [
         <li>C++</li>
         <li>Python</li>
         <li>JavaScript</li>
+        <li>SQL</li>
       </ul>
     ),
   },
@@ -28,33 +42,50 @@ const TAB_DATA = [
     ),
   },
   {
-    title: "Databases",
-    id: "databases",
+    title: "Data Science",
+    id: "datascience",
     content: (
       <ul className="list-disc pl-2 text-[#ADB7BE]">
-        <li>SQlite</li>
-        <li>MongoDB</li>
-        <li>SQL</li>
+        <li>Pandas</li>
+        <li>NumPy</li>
+        <li>Matplotlib</li>
+        <li>Seaborn</li>
+        <li>Jupyter Notebook</li>
+        <li>Exploratory Data Analysis (EDA)</li>
+        <li>Data Cleaning & Preprocessing</li>
+        <li>Feature Engineering</li>
       </ul>
     ),
   },
   {
-    title: "Education",
-    id: "education",
+    title: "AI / ML",
+    id: "aiml",
     content: (
       <ul className="list-disc pl-2 text-[#ADB7BE]">
-        <li>B.Tech CSE in Data Science</li>
-        <li>Pranveer Singh Institute of Technology (PSIT), Kanpur, India</li>
-        <li>Sept 2023 – June 2027</li>
-        <li><strong>SGPA: </strong>8.33 / 10.0</li>
-        <li><strong>Relevant Coursework: </strong>DSA | DBMS | OS | Computer Networks</li>
+        <li>Scikit-Learn</li>
+        <li>Supervised & Unsupervised Learning</li>
+        <li>Regression & Classification Models</li>
+        <li>Model Evaluation & Validation</li>
+        <li>Machine Learning Pipelines</li>
+      </ul>
+    ),
+  },
+  {
+    title: "Databases",
+    id: "databases",
+    content: (
+      <ul className="list-disc pl-2 text-[#ADB7BE]">
+        <li>SQLite</li>
+        <li>MongoDB</li>
+        <li>PostgreSQL</li>
+        <li>SQL</li>
       </ul>
     ),
   },
 ];
 
 const AboutMe = () => {
-  const [tab, setTab] = useState("languages");
+  const [tab, setTab] = useState("education");
   const [isPending, startTransition] = useTransition();
 
   const handleTabChange = (id) => {
@@ -66,28 +97,49 @@ const AboutMe = () => {
   return (
     <section className="text-white" id="about">
       <div className="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
-        <Image className="border border-slate-600" src="/images/coding.png" alt="Coding" width={500} height={500} />
+
+        <Image
+          className="border border-slate-600"
+          src="/images/coding.png"
+          alt="Coding"
+          width={500}
+          height={500}
+        />
+
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
-          <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
+
+          <h2 className="text-4xl font-bold text-white mb-4">
+            About Me
+          </h2>
 
           <p className="text-base lg:text-lg text-[#ADB7BE]">
-            I’m a third-year computer science student focused on strengthening
-            my understanding of core CS fundamentals like data structures,
-            algorithms, and system design.
+            I’m a third-year Computer Science student specializing in Data Science,
+            focused on building strong foundations in algorithms, systems, and
+            software engineering principles.
           </p>
 
           <p className="text-base lg:text-lg mt-2 text-[#ADB7BE]">
-            Alongside my coursework, I’m working on a real-world project that
-            connects theory with practical implementation.
+            My interests lie at the intersection of Software Engineering and
+            AI/ML. I enjoy building scalable applications while exploring how
+            data and machine learning can be used to create intelligent systems.
           </p>
 
           <p className="text-base lg:text-lg mt-2 text-[#ADB7BE]">
-            I’m interested in building solutions that are technically sound and
-            valuable for end users, and I’m exploring opportunities to
-            collaborate, learn, and grow as a developer.
+            Through projects and continuous learning, I work on combining backend
+            development, data analysis, and machine learning to build systems that
+            are practical, scalable, and capable of generating meaningful insights.
           </p>
 
           <div className="flex flex-row justify-start mt-8 mb-0">
+
+            <TabButton
+              selectTab={() => handleTabChange("education")}
+              active={tab === "education"}
+            >
+              {" "}
+              Education{" "}
+            </TabButton>
+
             <TabButton
               selectTab={() => handleTabChange("languages")}
               active={tab === "languages"}
@@ -105,6 +157,22 @@ const AboutMe = () => {
             </TabButton>
 
             <TabButton
+              selectTab={() => handleTabChange("datascience")}
+              active={tab === "datascience"}
+            >
+              {" "}
+              Data Science{" "}
+            </TabButton>
+
+            <TabButton
+              selectTab={() => handleTabChange("aiml")}
+              active={tab === "aiml"}
+            >
+              {" "}
+              AI / ML{" "}
+            </TabButton>
+
+            <TabButton
               selectTab={() => handleTabChange("databases")}
               active={tab === "databases"}
             >
@@ -112,18 +180,12 @@ const AboutMe = () => {
               Databases{" "}
             </TabButton>
 
-            <TabButton
-              selectTab={() => handleTabChange("education")}
-              active={tab === "education"}
-            >
-              {" "}
-              Education{" "}
-            </TabButton>
           </div>
 
           <div className="mt-8">
             {TAB_DATA.find((t) => t.id === tab)?.content}
           </div>
+
         </div>
       </div>
     </section>

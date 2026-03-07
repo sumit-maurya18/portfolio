@@ -6,12 +6,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const EmailSection = () => {
+
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
+  // State to control the circular loading indicator
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setErrorMessage(null);
+
+    // Start loader when request begins
+    setLoading(true);
 
     const data = {
       email: e.target.email.value,
@@ -33,30 +41,40 @@ const EmailSection = () => {
     const response = await fetch(endpoint, options);
     const resData = await response.json();
 
+    // Stop loader when response returns
+    setLoading(false);
+
     if (response.status === 200) {
+
       console.log("Message sent.");
+
+      // Show confirmation message
       setEmailSubmitted(true);
+
+      // Reset form fields
       e.target.reset();
 
       // Refresh after 3 seconds
       setTimeout(() => {
         window.location.reload();
-    }, 
-    
-    3000);
+      }, 3000);
 
     } else {
+
       console.error(resData?.error || "Unknown error");
+
       setErrorMessage("Something went wrong. Please try again later.");
     }
   };
 
   return (
-    <section id = "contact"className='grid md:grid-cols-2 my-12 py-24 gap-4 relative'>
+    <section id="contact" className='grid md:grid-cols-2 my-12 py-24 gap-4 relative'>
+
       <div>
         <h5 className='text-4xl font-bold text-white my-2'>
           Let's Connect
         </h5>
+
         <p className='text-[#ADB7BE] mb-4 max-w-md'>
           I'm currently looking for new opportunities, my inbox is always open.
           Whether you have a question or just want to say hi, I'll try my best 
@@ -68,22 +86,28 @@ const EmailSection = () => {
           <Link href="https://github.com/sumit-maurya18" target="_blank">
             <Image src={GithubIcon} alt='Github Icon' />
           </Link>
+
           <Link href="https://www.linkedin.com/in/sumitm620" target="_blank">
             <Image src={LinkedinIcon} alt='Linkedin Icon' />
           </Link>
+
           {/* Uncomment if using Discord */}
-          {/* <Link href="https://discord.com" target="_blank">
+          {/* 
+          <Link href="https://discord.com" target="_blank">
             <Image src={DiscordIcon} alt='Discord Icon' />
-          </Link> */}
+          </Link>
+          */}
         </div>
       </div>
 
       <div>
         <form className='flex flex-col' onSubmit={handleSubmit}>
+
           <div className='mb-6'>
             <label htmlFor="email" className='text-white mb-2 block text-sm font-medium'>
               Your email
             </label>
+
             <input
               name='email'
               type='email'
@@ -98,6 +122,7 @@ const EmailSection = () => {
             <label htmlFor="subject" className='text-white mb-2 block text-sm font-medium'>
               Subject
             </label>
+
             <input
               name='subject'
               type='text'
@@ -112,6 +137,7 @@ const EmailSection = () => {
             <label htmlFor='message' className='text-white block text-sm mb-2 font-medium'>
               Message
             </label>
+
             <textarea
               name='message'
               id='message'
@@ -121,25 +147,42 @@ const EmailSection = () => {
             />
           </div>
 
+          {/* Send Button */}
           <button
             type='submit'
-            className='bg-purple-500 hover:bg-purple-600 text-white font-medium py-2.5 px-5 rounded-lg w-full'>
-            Send a Message
+            disabled={loading}
+            className='bg-purple-500 hover:bg-purple-600 text-white font-medium py-2.5 px-5 rounded-lg w-full flex items-center justify-center gap-2'
+          >
+
+            {/* Circular progress indicator while message is being sent */}
+            {loading ? (
+              <>
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Sending...
+              </>
+            ) : (
+              "Send a Message"
+            )}
+
           </button>
 
+          {/* Confirmation message */}
           {emailSubmitted && (
             <p className='text-green-500 text-sm mt-2'>
               Email sent successfully!
             </p>
           )}
 
+          {/* Error message */}
           {errorMessage && (
             <p className='text-red-500 text-sm mt-2'>
               {errorMessage}
             </p>
           )}
+
         </form>
       </div>
+
     </section>
   );
 };

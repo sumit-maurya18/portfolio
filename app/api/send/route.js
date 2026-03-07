@@ -29,6 +29,8 @@ export async function POST(req) {
       `,
     });
 
+    await new Promise(r => setTimeout(r, 500));
+
     //
     // 2. Send confirmation email to USER
     //
